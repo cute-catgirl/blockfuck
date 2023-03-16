@@ -328,7 +328,11 @@ var workspace = Blockly.inject('blocklyDiv', {
     trashcan: false,
     zoom: {
         controls: true,
-        wheel: true
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.1,
+        scaleSpeed: 1.2
     },
     move: {
         scrollbars: true,
