@@ -65,6 +65,11 @@ class BrainfuckInterpreter {
         }
         return this.output;
     }
+    reset() {
+        this.memory = new Array(30000).fill(0);
+        this.pointer = 0;
+        this.output = '';
+    }
 }
 
 Blockly.Blocks['increment_pointer'] = {
@@ -167,8 +172,6 @@ Blockly.Blocks['start'] = {
     }
 };
 
-const interpreter = new BrainfuckInterpreter();
-
 var toolbox = {
     "kind": "flyoutToolbox",
     "contents": [
@@ -244,8 +247,11 @@ bfGenerator.scrub_ = function(block, code, thisOnly) {
     return code;
 };
 
+const interpreter = new BrainfuckInterpreter();
 // run code
 function runCode() {
+    // reset memory
+    interpreter.reset();
     const code = bfGenerator.workspaceToCode(workspace);
     document.getElementById('output').innerHTML = interpreter.interpret(code);
 }
