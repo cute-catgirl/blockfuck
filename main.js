@@ -175,6 +175,18 @@ Blockly.Blocks['start'] = {
     }
 };
 
+Blockly.Blocks['comment'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("Comment"), "COMMENT");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+}
+
 var toolbox = {
     "kind": "flyoutToolbox",
     "contents": [
@@ -205,6 +217,10 @@ var toolbox = {
         {
             "kind": "block",
             "type": "loop"
+        },
+        {
+            "kind": "block",
+            "type": "comment"
         }
     ]
 };
@@ -235,6 +251,9 @@ bfGenerator['loop'] = function(block) {
     return '[' + loopContent + ']';
 }
 bfGenerator['start'] = function(block) {
+    return '';
+}
+bfGenerator['comment'] = function(block) {
     return '';
 }
 
