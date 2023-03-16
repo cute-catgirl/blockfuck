@@ -169,16 +169,15 @@ Blockly.Blocks['start'] = {
         this.setHelpUrl("");
         this.setPreviousStatement(false, null);
         this.setNextStatement(true, null);
+        this.setMovable(false);
+        this.setDeletable(false);
+        this.setEditable(false);
     }
 };
 
 var toolbox = {
     "kind": "flyoutToolbox",
     "contents": [
-        {
-            "kind": "block",
-            "type": "start"
-        },
         {
             "kind": "block",
             "type": "increment_pointer"
@@ -260,7 +259,17 @@ Blockly.HSV_SATURATION = 0.57;
 Blockly.HSV_VALUE = 0.46;
 
 var workspace = Blockly.inject('blocklyDiv', {
-    toolbox: toolbox
+    toolbox: toolbox,
+    trashcan: false,
+    zoom: {
+        controls: true,
+        wheel: true
+    },
+    move: {
+        scrollbars: true,
+        drag: true,
+        wheel: true
+    }
 });
 
 // Place start block in workspace
@@ -268,3 +277,6 @@ var startBlock = workspace.newBlock('start');
 startBlock.initSvg();
 startBlock.render();
 startBlock.moveBy(50, 50);
+
+// Disable blocks not connected to start block
+workspace.addChangeListener(Blockly.Events.disableOrphans);
