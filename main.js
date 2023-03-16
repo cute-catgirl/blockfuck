@@ -154,7 +154,7 @@ Blockly.Blocks['loop'] = {
             .appendField("]");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(190);
+        this.setColour(220);
         this.setTooltip("");
         this.setHelpUrl("");
     }
