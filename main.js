@@ -255,6 +255,36 @@ function runCode() {
     document.getElementById('output').innerHTML = interpreter.interpret(code);
 }
 
+function exportCode() {
+    // save workspace to file
+    const link = document.createElement('a');
+    const file = new Blob([Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))], {type: 'text/xml'});
+    link.href = URL.createObjectURL(file);
+    link.download = 'code.xml';
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
+function importCode() {
+    // open file selection dialog
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.xml';
+    input.onchange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            // clear workspace
+            workspace.clear();
+            // load code from file
+            const xml = event.target.result;
+            Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), workspace);
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+}
+
 const theme = Blockly.Theme.defineTheme('bfTheme', {
     'base': Blockly.Themes.Classic,
     'componentStyles': {
