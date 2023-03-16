@@ -78,7 +78,7 @@ Blockly.Blocks['increment_pointer'] = {
             .appendField(">")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -90,7 +90,7 @@ Blockly.Blocks['decrement_pointer'] = {
             .appendField("<")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -102,7 +102,7 @@ Blockly.Blocks['increment_value'] = {
             .appendField("+")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -114,7 +114,7 @@ Blockly.Blocks['decrement_value'] = {
             .appendField("-")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -126,7 +126,7 @@ Blockly.Blocks['output'] = {
             .appendField(".")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -138,7 +138,7 @@ Blockly.Blocks['input'] = {
             .appendField(",")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -154,7 +154,7 @@ Blockly.Blocks['loop'] = {
             .appendField("]");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(204);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -164,7 +164,7 @@ Blockly.Blocks['start'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("Start");
-        this.setColour(204);
+        this.setColour(349);
         this.setTooltip("");
         this.setHelpUrl("");
         this.setPreviousStatement(false, null);
@@ -247,7 +247,7 @@ bfGenerator.scrub_ = function(block, code, thisOnly) {
 };
 
 const interpreter = new BrainfuckInterpreter();
-// run code
+
 function runCode() {
     // reset memory
     interpreter.reset();
@@ -255,8 +255,24 @@ function runCode() {
     document.getElementById('output').innerHTML = interpreter.interpret(code);
 }
 
-Blockly.HSV_SATURATION = 0.57;
-Blockly.HSV_VALUE = 0.46;
+const theme = Blockly.Theme.defineTheme('bfTheme', {
+    'base': Blockly.Themes.Classic,
+    'componentStyles': {
+        'workspaceBackgroundColour': '#1D263B',
+        'toolboxBackgroundColour': '#23395B',
+        'toolboxForegroundColour': '#FFFBFF',
+        'flyoutBackgroundColour': '#23395B',
+        'flyoutForegroundColour': '#FFFBFF',
+        'flyoutOpacity': 1,
+        'scrollbarColour': '#c0bec0',
+    },
+    'fontStyle': {
+        'family': 'monospace',
+    }
+});
+
+Blockly.HSV_SATURATION = 0.93;
+Blockly.HSV_VALUE = 0.82;
 
 var workspace = Blockly.inject('blocklyDiv', {
     toolbox: toolbox,
@@ -269,7 +285,8 @@ var workspace = Blockly.inject('blocklyDiv', {
         scrollbars: true,
         drag: true,
         wheel: true
-    }
+    },
+    theme: theme
 });
 
 // Place start block in workspace

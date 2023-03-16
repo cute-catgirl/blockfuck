@@ -14,14 +14,14 @@
 #outputPane {
     width: 100%;
     height: 10vh;
-    background-color: #f1f1f1;
+    background-color: #1D263B;
     display: flex;
 }
 
 #runButton {
     width: 6%;
     height: 100%;
-    background-color: #4CAF50;
+    background-color: #34a974;
     color: white;
     font-size: 16px;
     border: none;
@@ -31,7 +31,7 @@
 #output {
     width: 95%;
     height: 100%;
-    background-color: #f1f1f1;
+    background-color: #1D263B;
     overflow: scroll;
     font-family: monospace;
     padding: 10px;
