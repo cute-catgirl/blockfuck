@@ -29,8 +29,7 @@ class BrainfuckInterpreter {
                     this.output += String.fromCharCode(this.memory[this.pointer]);
                     break;
                 case ',':
-                    // This method reads input from the user and stores it in the current cell
-                    // You'll need to implement this method yourself
+                    this.memory[this.pointer] = prompt('Enter a character: ').charCodeAt(0);
                     break;
                 case '[':
                     if (this.memory[this.pointer] === 0) {
