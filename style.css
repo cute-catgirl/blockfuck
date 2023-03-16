@@ -1,0 +1,36 @@
+/* CSS reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling for the Blockly workspace */
+#blocklyDiv {
+    width: 100%;
+    height: 90vh;
+}
+
+#outputPane {
+    width: 100%;
+    height: 10vh;
+    background-color: #f1f1f1;
+    display: flex;
+}
+
+#runButton {
+    width: 6%;
+    height: 100%;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#output {
+    width: 95%;
+    height: 100%;
+    background-color: #f1f1f1;
+    overflow: scroll;
+}
