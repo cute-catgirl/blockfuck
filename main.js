@@ -10,6 +10,7 @@ class BrainfuckInterpreter {
         while (i < code.length) {
             amount++;
             if (amount > 100000) {
+                return "Error: Infinite loop detected";
                 break;
             }
             switch (code[i]) {
@@ -21,15 +22,24 @@ class BrainfuckInterpreter {
                     break;
                 case '+':
                     this.memory[this.pointer]++;
+                    if (this.memory[this.pointer] > 255) {
+                        this.memory[this.pointer] = 0;
+                    }
                     break;
                 case '-':
                     this.memory[this.pointer]--;
+                    if (this.memory[this.pointer] < 0) {
+                        this.memory[this.pointer] = 255;
+                    }
                     break;
                 case '.':
                     this.output += String.fromCharCode(this.memory[this.pointer]);
                     break;
                 case ',':
                     this.memory[this.pointer] = prompt('Enter a character: ').charCodeAt(0);
+                    break;
+                case '#':
+                    alert("Pointer Position: " + this.pointer + "\nValue at current cell: "+this.memory[this.pointer]);
                     break;
                 case '[':
                     if (this.memory[this.pointer] === 0) {
@@ -185,45 +195,73 @@ Blockly.Blocks['comment'] = {
         this.setTooltip("");
         this.setHelpUrl("");
     }
+};
+
+Blockly.Blocks['debug'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Debug");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(300);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
 }
 
 var toolbox = {
-    "kind": "flyoutToolbox",
+    "kind": "categoryToolbox",
     "contents": [
         {
-            "kind": "block",
-            "type": "increment_pointer"
+            "kind": "category",
+            "name": "Main",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "increment_pointer"
+                },
+                {
+                    "kind": "block",
+                    "type": "decrement_pointer"
+                },
+                {
+                    "kind": "block",
+                    "type": "increment_value"
+                },
+                {
+                    "kind": "block",
+                    "type": "decrement_value"
+                },
+                {
+                    "kind": "block",
+                    "type": "output"
+                },
+                {
+                    "kind": "block",
+                    "type": "input"
+                },
+                {
+                    "kind": "block",
+                    "type": "loop"
+                }
+            ]
         },
         {
-            "kind": "block",
-            "type": "decrement_pointer"
-        },
-        {
-            "kind": "block",
-            "type": "increment_value"
-        },
-        {
-            "kind": "block",
-            "type": "decrement_value"
-        },
-        {
-            "kind": "block",
-            "type": "output"
-        },
-        {
-            "kind": "block",
-            "type": "input"
-        },
-        {
-            "kind": "block",
-            "type": "loop"
-        },
-        {
-            "kind": "block",
-            "type": "comment"
+            "kind": "category",
+            "name": "Extra",
+            "contents": [
+                {
+                    "kind": "block",
+                    "type": "comment"
+                },
+                {
+                    "kind": "block",
+                    "type": "debug"
+                },
+            ]
         }
     ]
-};
+}
 
 const bfGenerator = new Blockly.Generator('brainfuck');
 bfGenerator['increment_pointer'] = function(block) {
@@ -255,6 +293,9 @@ bfGenerator['start'] = function(block) {
 }
 bfGenerator['comment'] = function(block) {
     return '';
+}
+bfGenerator['debug'] = function(block) {
+    return '#';
 }
 
 bfGenerator.scrub_ = function(block, code, thisOnly) {
