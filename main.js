@@ -345,6 +345,19 @@ function importCode() {
     input.click();
 }
 
+function exportBfCode() {
+    const link = document.createElement('a');
+    let code = bfGenerator.workspaceToCode(workspace);
+    // remove debug statements
+    code = code.replace(/#/g, '');
+    console.log(code);
+    const file = new Blob([code], {type: 'text/plain'});
+    link.href = URL.createObjectURL(file);
+    link.download = 'code.bf';
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
 const theme = Blockly.Theme.defineTheme('bfTheme', {
     'base': Blockly.Themes.Classic,
     'componentStyles': {
