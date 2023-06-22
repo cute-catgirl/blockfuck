@@ -33,7 +33,11 @@ button {
     border-radius: 5px;
     margin: 0 10px;
     font-family: monospace;
+    transistion: 0.1s;
 }
+
+button:hover {
+    background-color: #3ecf8d;
 
 #output {
     width: 95%;
