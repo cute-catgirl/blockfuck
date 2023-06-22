@@ -38,6 +38,7 @@ button {
 
 button:hover {
     background-color: #3ecf8d;
+}
 
 #output {
     width: 95%;
